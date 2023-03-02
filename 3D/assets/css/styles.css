@@ -1,0 +1,191 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+body {
+  background-color: #4d1881;
+}
+
+@keyframes goCube {
+  0% {
+    transform: rotateX(0deg);
+  }
+  10% {
+    transform: rotateX(-90deg);
+  }
+  20% {
+    transform: rotateX(-180deg);
+  }
+  30% {
+    transform: rotateX(-270deg);
+  }
+  40% {
+    transform: rotateX(-360deg);
+  }
+  50% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+  60% {
+    transform: rotateX(0deg) rotateY(90deg);
+  }
+  70% {
+    transform: rotateX(0deg) rotateY(180deg);
+  }
+  80% {
+    transform: rotateX(0deg) rotateY(270deg);
+  }
+  90% {
+    transform: rotateX(0deg) rotateY(360deg);
+  }
+  100% {
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+}
+
+/*
+- PHONE | Y axis
+0% {
+  transform: rotateX(0deg);
+}
+10% {
+  transform: rotateX(-90deg);
+}
+20% {
+  transform: rotateX(-180deg);
+}
+30% {
+  transform: rotateX(-270deg);
+}
+40% {
+  transform: rotateX(-360deg);
+}
+
+- Mid Animation
+50% {
+  transform: rotateX(0deg) rotateY(0deg);
+}
+
+- PHONE | X axis (it rotates to the left, negative values rotate it to the right)
+60% {
+  transform: rotateX(0deg) rotateY(90deg);
+}
+70% {
+  transform: rotateX(0deg) rotateY(180deg);
+}
+80% {
+  transform: rotateX(0deg) rotateY(270deg);
+}
+90% {
+  transform: rotateX(0deg) rotateY(360deg);
+}
+100% {
+  transform: rotateX(0deg) rotateY(0deg);
+}
+*/
+
+.cuboid {
+  --depth: 100px;
+  --height: 300px;
+  --width: 200px;
+  animation: goCube 12s 2s infinite alternate;
+  height: var(--height);
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 3s ease;
+  width: var(--width);
+
+  /* root design 
+  --depth: 100px;
+  --height: 300px;
+  --width: 200px;
+  height: var(--height);
+  position: relative;
+  transform: rotateX(24deg) rotateY(32deg);
+  transform-style: preserve-3d;
+  transition: all 3s ease;
+  width: var(--width);
+  */
+
+  /* portrait design
+  --depth: 100px;
+  --height: 300px;
+  --width: 200px;
+  perspective: 540px;
+  height: var(--height);
+  position: relative;
+  transform: rotateX(180deg) rotateY(180deg);
+  transform-style: preserve-3d;
+  width: var(--width);
+  */
+}
+
+.cuboid__side {
+  background: red center no-repeat fixed;
+  background-size: cover;
+  border: 1px solid hsl(0, 0%, 10%);
+  position: absolute;
+}
+
+.cuboid__side:nth-child(1),
+.cuboid__side:nth-child(2) {
+  --coefficient: -0.5;
+  height: var(--height);
+  transform: translate3d(0, 0, calc(var(--depth) * var(--coefficient)));
+  width: var(--width);
+}
+
+.cuboid__side:nth-child(1) {
+  background-image: url('../images/box-back-face.png');
+}
+
+.cuboid__side:nth-child(2) {
+  --coefficient: 0.5;
+  background-image: url('../images/box-front-face.webp');
+}
+
+.cuboid__side:nth-child(3),
+.cuboid__side:nth-child(4) {
+  --rotation: 90deg;
+  height: var(--height);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotateY(var(--rotation))
+    translate3d(0, 0, calc(var(--width) * -0.5));
+  width: var(--depth);
+}
+
+.cuboid__side:nth-child(3) {
+  background-image: url('../images/box-left-right-face.png');
+}
+
+.cuboid__side:nth-child(4) {
+  --rotation: -90deg;
+  background-image: url('../images/box-left-right-face.png');
+}
+
+.cuboid__side:nth-child(5),
+.cuboid__side:nth-child(6) {
+  --rotation: -90deg;
+  height: var(--depth);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotateX(var(--rotation))
+    translate3d(0, 0, calc(var(--height) * -0.5));
+  width: var(--width);
+}
+
+.cuboid__side:nth-child(6) {
+  --rotation: 90deg;
+}
