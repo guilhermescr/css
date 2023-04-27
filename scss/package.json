@@ -1,0 +1,11 @@
+{
+  "name": "sass-training",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch:sass": "sass --watch assets/scss/main.scss assets/scss/main.css"
+  },
+  "author": "",
+  "license": "ISC"
+}
